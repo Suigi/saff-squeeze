@@ -16,12 +16,8 @@ class AutopilotTest {
         var london = new Airport("London", closestLondonRunway, furtherLondonRunway);
         var autopilot = new Autopilot(aircraft, london);
 
-        var targetAirport = Arrays.stream(autopilot.airports)
-                .filter(airport -> airport.city().equals("London"))
-                .findFirst()
-                .get();
-
         var targetRunway = autopilot.findClosest(london.runways());
+
         assertThat(targetRunway.coordinates())
             .isEqualTo(Coordinates.of(5, 5));
     }
