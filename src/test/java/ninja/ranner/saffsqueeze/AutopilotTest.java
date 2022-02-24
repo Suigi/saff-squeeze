@@ -11,14 +11,15 @@ class AutopilotTest {
 
     @Test
     public void autopilot_flies_to_closest_runway() {
-        var aircraft = new FakeAircraft(Coordinates.of(2, 2));
+        var aircraftPosition = Coordinates.of(2, 2);
+        var aircraft = new FakeAircraft(aircraftPosition);
         var closestLondonRunway = Runway.at(5, 5);
         var furtherLondonRunway = Runway.at(10, 10);
         var london = new Airport("London", closestLondonRunway, furtherLondonRunway);
         var autopilot = new Autopilot(aircraft, london);
 
         var targetRunway = Arrays.stream(london.runways())
-                .max(Comparator.comparing(autopilot::distanceTo))
+                .max(Comparator.comparing(runway -> Autopilot.distanceTo(runway, aircraftPosition)))
                 .get();
 
         assertThat(targetRunway.coordinates())

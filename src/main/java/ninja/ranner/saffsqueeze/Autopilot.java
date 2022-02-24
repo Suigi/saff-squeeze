@@ -25,15 +25,15 @@ public class Autopilot {
 
     public Runway findClosest(Runway[] runways) {
         return Arrays.stream(runways)
-                .max(Comparator.comparing(this::distanceTo))
+                .max(Comparator.comparing(runway -> distanceTo(runway, aircraft.currentPosition())))
                 .get();
     }
 
-    public int distanceTo(Runway runway) {
-        return distanceSquared(runway.coordinates(), aircraft.currentPosition());
+    public static int distanceTo(Runway runway, Coordinates currentPosition) {
+        return distanceSquared(runway.coordinates(), currentPosition);
     }
 
-    private int distanceSquared(Coordinates a, Coordinates b) {
+    private static int distanceSquared(Coordinates a, Coordinates b) {
         var longitudeDifference = Math.abs(a.longitude() - b.longitude());
         var latitudeDifference = Math.abs(a.latitude() - b.latitude());
         return longitudeDifference * longitudeDifference +
