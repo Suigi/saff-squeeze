@@ -24,28 +24,4 @@ class AutopilotTest {
             .isEqualTo(Coordinates.of(5, 5));
     }
 
-    public static class FakeAircraft implements Autopilot.Aircraft {
-
-        private final Coordinates currentPosition;
-        private Coordinates target;
-
-        public FakeAircraft(Coordinates currentPosition) {
-            this.currentPosition = currentPosition;
-        }
-
-        @Override
-        public void setWayPoint(Coordinates plan) {
-            this.target = plan;
-        }
-
-        @Override
-        public Coordinates currentPosition() {
-            return currentPosition;
-        }
-
-        public void assertTargetCoordinatesAre(Coordinates coordinates) {
-            assertThat(this.target)
-                    .isEqualTo(coordinates);
-        }
-    }
 }
