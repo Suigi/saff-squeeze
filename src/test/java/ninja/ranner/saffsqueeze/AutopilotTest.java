@@ -17,7 +17,7 @@ class AutopilotTest {
         var london = new Airport("London", closestLondonRunway, furtherLondonRunway);
 
         var targetRunway = Arrays.stream(london.runways())
-                .max(Comparator.comparing(runway -> Autopilot.distanceTo(runway, aircraftPosition)))
+                .min(Comparator.comparing(runway -> Autopilot.distanceTo(runway, aircraftPosition)))
                 .get();
 
         assertThat(targetRunway.coordinates())
