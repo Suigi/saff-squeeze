@@ -29,7 +29,7 @@ public class Autopilot {
                 .get();
     }
 
-    private int distanceTo(Runway runway) {
+    public int distanceTo(Runway runway) {
         return distanceSquared(runway.coordinates(), aircraft.currentPosition());
     }
 

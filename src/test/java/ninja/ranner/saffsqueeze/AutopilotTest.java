@@ -3,6 +3,7 @@ package ninja.ranner.saffsqueeze;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +17,9 @@ class AutopilotTest {
         var london = new Airport("London", closestLondonRunway, furtherLondonRunway);
         var autopilot = new Autopilot(aircraft, london);
 
-        var targetRunway = autopilot.findClosest(london.runways());
+        var targetRunway = Arrays.stream(london.runways())
+                .max(Comparator.comparing(autopilot::distanceTo))
+                .get();
 
         assertThat(targetRunway.coordinates())
             .isEqualTo(Coordinates.of(5, 5));
