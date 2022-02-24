@@ -22,6 +22,8 @@ class AutopilotTest {
                 .get();
 
         var targetRunway = autopilot.findClosest(targetAirport.runways());
+        assertThat(targetRunway.coordinates())
+            .isEqualTo(Coordinates.of(5, 5));
         autopilot.aircraft.setWayPoint(targetRunway.coordinates());
 
         aircraft.assertTargetCoordinatesAre(Coordinates.of(5, 5));
