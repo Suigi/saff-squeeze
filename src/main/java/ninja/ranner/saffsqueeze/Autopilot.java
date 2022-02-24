@@ -5,8 +5,8 @@ import java.util.Comparator;
 
 public class Autopilot {
 
-    private final Aircraft aircraft;
-    private final Airport[] airports;
+    public final Aircraft aircraft;
+    public final Airport[] airports;
 
     public Autopilot(Aircraft aircraft, Airport... airPorts) {
         this.aircraft = aircraft;
@@ -23,7 +23,7 @@ public class Autopilot {
         aircraft.setWayPoint(targetRunway.coordinates());
     }
 
-    private Runway findClosest(Runway[] runways) {
+    public Runway findClosest(Runway[] runways) {
         return Arrays.stream(runways)
                 .max(Comparator.comparing(this::distanceTo))
                 .get();

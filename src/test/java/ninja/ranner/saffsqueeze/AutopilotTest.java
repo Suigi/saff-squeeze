@@ -2,6 +2,8 @@ package ninja.ranner.saffsqueeze;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AutopilotTest {
@@ -14,7 +16,13 @@ class AutopilotTest {
         var london = new Airport("London", closestLondonRunway, furtherLondonRunway);
         var autopilot = new Autopilot(aircraft, london);
 
-        autopilot.flyTo("London");
+        var targetAirport = Arrays.stream(autopilot.airports)
+                .filter(airport -> airport.city().equals("London"))
+                .findFirst()
+                .get();
+
+        var targetRunway = autopilot.findClosest(targetAirport.runways());
+        autopilot.aircraft.setWayPoint(targetRunway.coordinates());
 
         aircraft.assertTargetCoordinatesAre(Coordinates.of(5, 5));
     }
