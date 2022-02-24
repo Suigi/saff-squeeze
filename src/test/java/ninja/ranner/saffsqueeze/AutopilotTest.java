@@ -21,7 +21,7 @@ class AutopilotTest {
                 .findFirst()
                 .get();
 
-        var targetRunway = autopilot.findClosest(targetAirport.runways());
+        var targetRunway = autopilot.findClosest(london.runways());
         assertThat(targetRunway.coordinates())
             .isEqualTo(Coordinates.of(5, 5));
     }
